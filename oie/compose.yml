@@ -1,0 +1,40 @@
+services:
+  oie:
+    image: sagait/engine:4.6.0-ubuntu
+    platform: linux/amd64
+    container_name: oie460
+
+    restart: unless-stopped
+
+    environment:
+      VMOPTIONS: "-Xmx2048m"
+
+    ports:
+      # OIE HTTP
+      - "127.0.0.1:28080:8080"
+
+      # OIE Administrator HTTPS
+      - "127.0.0.1:28443:8443"
+
+      # Our OIE HL7/MLLP training listener
+      # Host 3575 -> OIE channel port 2575
+      - "127.0.0.1:3575:2575"
+
+    volumes:
+      - oie_appdata:/opt/engine/appdata
+      - oie_extensions:/opt/engine/custom-extensions
+
+    networks:
+      - default
+      - integration_lab      
+
+volumes:
+  oie_appdata:
+  oie_extensions:
+ 
+
+      
+networks:
+  integration_lab:
+    external: true
+    name: integration-lab   

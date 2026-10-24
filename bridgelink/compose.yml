@@ -1,0 +1,71 @@
+services:
+
+  bridgelink:
+    image: innovarhealthcare/bridgelink:26.6.1
+    container_name: bridgelink2661
+    platform: linux/amd64
+
+    restart: unless-stopped
+    user: "1000:1000"
+
+    environment:
+      MP_DATABASE: derby
+
+    ports:
+      # HTTP
+      - "127.0.0.1:38080:8080"
+
+      # BridgeLink API / classic Administrator
+      - "127.0.0.1:38443:8443"
+
+      # HL7 MLLP training port
+      - "127.0.0.1:4575:2575"
+
+    volumes:
+      - bridgelink_appdata:/opt/bridgelink/appdata
+      - bridgelink_extensions:/opt/bridgelink/custom-extensions
+
+    networks:
+      - default
+      - integration_lab
+
+    security_opt:
+      - no-new-privileges:true
+
+
+  webadmin:
+    image: innovarhealthcare/bridgelink-webadmin:26.6.0
+    container_name: bridgelink-webadmin
+
+    profiles:
+      - webadmin
+
+    restart: unless-stopped
+
+    ports:
+      - "127.0.0.1:38444:8444"
+
+    environment:
+      BRIDGELINK_SERVER_URL: "https://bridgelink:8443"
+      PORT: "8444"
+
+      # Leave unset until you review and accept the WebAdmin license.
+      BL_ACCEPT_LICENSE: "${BL_ACCEPT_LICENSE:-}"
+
+    depends_on:
+      bridgelink:
+        condition: service_healthy
+
+    security_opt:
+      - no-new-privileges:true
+
+
+volumes:
+  bridgelink_appdata:
+  bridgelink_extensions:
+
+
+networks:
+  integration_lab:
+    external: true
+    name: integration-lab

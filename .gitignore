@@ -1,0 +1,109 @@
+# big / throwaway
+backups/
+temp
+
+# third-party with nested .git
+tcl/vendor/tclhl7/
+
+# logs
+tcl/logs/
+
+
+# ============================================
+# Healthcare Integration Lab - .gitignore
+# ============================================
+
+# 1. Archives and compressed backups
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+*.7z
+*.rar
+
+# 2. Backup and temporary files
+*.bak
+*.bak.*
+*.backup
+*.old
+*.orig
+*~
+*.swp
+*.swo
+*.tmp
+*.temp
+
+# 3. Backup directories
+backups/
+
+# 4. Logs and runtime output
+*.log
+logs/
+*.log.*
+*.pid
+
+# 5. Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+secrets/
+
+# 6. Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# 7. Java / Spring Boot / Apache Camel
+target/
+.gradle/
+*.class
+*.jar
+*.war
+
+# 8. Node.js / React
+node_modules/
+dist/
+build/
+coverage/
+.npm/
+.next/
+
+# 9. Database runtime storage
+database/data/
+database/postgres-data/
+database/mysql-data/
+database/redis-data/
+*.sqlite
+*.sqlite3
+*.db
+
+# 10. IDE and OS temporary files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# 11. Generated TclHL7 build artifacts
+tcl/vendor/tclhl7/build/
+
+# 12. Local Docker overrides
+compose.override.yml
+docker-compose.override.yml
+
+# 13. Local test outputs
+test-results/
+tmp/
+temp/
+mirth-administrator-launcher-*
+tcl/course_plan.txt

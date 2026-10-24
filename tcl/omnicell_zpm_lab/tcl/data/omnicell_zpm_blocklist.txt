@@ -1,0 +1,26 @@
+# Training transcription of Kaitlin's Omnicell exclusion list (Oct 2026).
+# Verify against the original Excel attachment before any real deployment.
+# One item ID per line. Preserve internal spaces and leading zeros.
+PTOWNOVERNITE
+PTS OWN HYCODAN
+PT OWN MED VIAL
+PCA-EPIDURAL KEY
+PT OWN NARC D,T
+PTOWN PERCT
+PTOWNTESTOSTERON
+PTS OWN CLONAZ4
+TONSIL
+OPRX
+PEPKIT2
+RSI
+NEOCRCART
+KIT
+DEX12D5KIT
+DEX15 KIT
+SAMKITACET
+SAMKITNAPROXEN
+SODBICARB KIT
+HYAKIT
+00000000
+MEDCARTKEY
+PTOWNVYVANSE

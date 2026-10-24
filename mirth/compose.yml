@@ -1,0 +1,56 @@
+services:
+  mirth:
+    image: nextgenhealthcare/connect:4.5.2
+    container_name: mirth452
+
+    restart: unless-stopped
+
+    environment:
+      VMOPTIONS: "-Xms512m,-Xmx2g"
+
+    ports:
+      # Mirth HTTP launch page
+      # Host 18080 -> container 8080
+      # We keep 18080 because your host's 8080 is already used by Python.
+      - "127.0.0.1:18080:8080"
+
+      # Mirth Administrator HTTPS
+      # Make host and container ports identical to avoid the 18443/8443 issue.
+      - "127.0.0.1:8443:8443"
+
+      # HL7 MLLP listener for our training channels.
+      # Nothing has to listen here yet; a Mirth channel will later use it.
+      - "127.0.0.1:2575:2575"
+
+    volumes:
+      # Preserve your existing Mirth appdata / Derby database.
+      - mirth_data:/opt/connect/appdata
+
+      # Preserve the existing custom-extensions volume.
+      - mirth_custom_extensions:/opt/connect/custom-extensions
+
+
+    networks:
+      - default
+      - integration_lab      
+
+volumes:
+
+  # Existing Docker volume:
+  # /var/lib/docker/volumes/mirth452-data/_data
+  mirth_data:
+    external: true
+    name: mirth452-data
+
+  # Existing anonymous Docker volume currently mounted at
+  # /opt/connect/custom-extensions
+  mirth_custom_extensions:
+    external: true
+    name: ce50b645f6a6106b9f58f89e4966bb2d30aa346517250ae070f38284d51f056f
+
+
+      
+networks:
+  integration_lab:
+    external: true
+    name: integration-lab
