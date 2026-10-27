@@ -1,0 +1,55 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [ {
+    "fullUrl": "urn:uuid:b6e56ff4-aa73-477e-adad-b0acdf1306bb",
+    "resource": {
+      "resourceType": "Patient",
+      "id": "b6e56ff4-aa73-477e-adad-b0acdf1306bb",
+      "identifier": [ {
+        "system": "https://example.org/synthetic-mrn",
+        "value": "TEST123"
+      } ],
+      "name": [ {
+        "text": "ALICE EXAMPLE"
+      } ]
+    }
+  }, {
+    "fullUrl": "urn:uuid:c522e1d5-ab2b-47f4-8e6c-189e14e86c6a",
+    "resource": {
+      "resourceType": "Practitioner",
+      "id": "c522e1d5-ab2b-47f4-8e6c-189e14e86c6a",
+      "identifier": [ {
+        "system": "https://example.org/synthetic-physician-id",
+        "value": "P100"
+      } ]
+    }
+  }, {
+    "fullUrl": "urn:uuid:b0c2faff-8754-41ef-9eff-55d1864dc268",
+    "resource": {
+      "resourceType": "DocumentReference",
+      "id": "b0c2faff-8754-41ef-9eff-55d1864dc268",
+      "status": "current",
+      "type": {
+        "coding": [ {
+          "system": "http://loinc.org",
+          "code": "18842-5"
+        } ]
+      },
+      "subject": {
+        "reference": "urn:uuid:b6e56ff4-aa73-477e-adad-b0acdf1306bb"
+      },
+      "date": "2026-10-26T02:40:57.503+00:00",
+      "author": [ {
+        "reference": "urn:uuid:c522e1d5-ab2b-47f4-8e6c-189e14e86c6a"
+      } ],
+      "content": [ {
+        "attachment": {
+          "contentType": "text/plain",
+          "data": "U3ludGhldGljIGRpc2NoYXJnZSBzdW1tYXJ5IGZvciBsYWIuIE5vIHJlYWwgUEhJLg==",
+          "title": "Synthetic clinical report"
+        }
+      } ]
+    }
+  } ]
+}

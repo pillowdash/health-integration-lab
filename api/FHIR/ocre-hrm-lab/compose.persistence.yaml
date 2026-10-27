@@ -1,0 +1,44 @@
+
+services:
+
+  ocre-flyway:
+    image: flyway/flyway:11
+    command: migrate
+    environment:
+      FLYWAY_URL: jdbc:postgresql://ocre-postgres:5432/ocre_lab
+      FLYWAY_USER: ocre_lab
+      FLYWAY_PASSWORD: ${OCRE_DB_PASSWORD:?Password required}
+    volumes:
+      - ./backend/src/main/resources/db/migration:/flyway/sql:ro
+    depends_on:
+      ocre-db:
+        condition: service_healthy
+    networks:
+      - integration-lab
+
+  ocre-db:
+    image: postgres:17
+    container_name: ocre-postgres
+    ports:
+    - "127.0.0.1:15432:5432"
+    environment:
+      POSTGRES_DB: ocre_lab
+      POSTGRES_USER: ocre_lab
+      POSTGRES_PASSWORD: ${OCRE_DB_PASSWORD:?Password required}
+    volumes:
+      - ocre_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ocre_lab -d ocre_lab"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - integration-lab
+
+volumes:
+  ocre_pgdata:
+
+networks:
+  integration-lab:
+    external: true
+

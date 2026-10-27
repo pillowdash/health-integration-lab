@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: ocre-lab
+  rabbitmq:
+    host: ${RABBIT_HOST:localhost}
+    port: 5672
+    username: ${RABBIT_USER:labuser}
+    password: ${RABBIT_PASSWORD:labonly-change-me}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

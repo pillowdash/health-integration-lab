@@ -1,0 +1,36 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4-management
+    hostname: ocre-rabbit
+    environment:
+      RABBITMQ_DEFAULT_USER: labuser
+      RABBITMQ_DEFAULT_PASS: labonly-change-me
+    ports:
+      - "127.0.0.1:15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+    networks: [integration-lab]
+  ocre-api:
+    build: ./backend
+    environment:
+      RABBIT_HOST: rabbitmq
+      RABBIT_USER: labuser
+      RABBIT_PASSWORD: labonly-change-me
+    ports:
+      - "127.0.0.1:18081:8080"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks: [integration-lab]
+  ocre-ui:
+    build: ./frontend
+    ports:
+      - "127.0.0.1:5173:80"
+    depends_on: [ocre-api]
+    networks: [integration-lab]
+networks:
+  integration-lab:
+    external: true

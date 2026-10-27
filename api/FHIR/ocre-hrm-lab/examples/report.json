@@ -1,0 +1,8 @@
+{
+  "messageControlId": "SYNTH-OCRE-0001",
+  "mrn": "TEST123",
+  "patientName": "Alice Example",
+  "physicianId": "P100",
+  "reportCode": "18842-5",
+  "reportText": "Synthetic discharge summary for software testing only. No patient information."
+}
