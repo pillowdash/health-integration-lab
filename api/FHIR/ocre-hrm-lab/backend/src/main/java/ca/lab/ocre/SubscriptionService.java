@@ -5,13 +5,15 @@ import ca.lab.ocre.Models.*;
 import org.hl7.fhir.r4.model.*;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Profile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
-public class SubscriptionService {
+@Profile("!postgres")
+public class SubscriptionService implements SubscriptionOperations {
   private static final String FILTER_URL =
       "http://hl7.org/fhir/uv/subscriptions-backport/StructureDefinition/backport-filter-criteria";
   private static final String CONTENT_URL =

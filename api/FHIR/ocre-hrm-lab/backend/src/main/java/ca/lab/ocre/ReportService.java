@@ -7,6 +7,7 @@ import ca.lab.ocre.Models.ReportEvent;
 import org.hl7.fhir.r4.model.*;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Profile;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.*;
@@ -14,7 +15,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
-public class ReportService {
+@Profile("!postgres")
+public class ReportService implements ReportOperations {
   private final RabbitTemplate broker;
   private final ObjectMapper json;
   private final FhirContext fhir = FhirContext.forR4();

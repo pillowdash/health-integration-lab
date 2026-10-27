@@ -14,12 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class ApiController {
-  private final ReportService reports;
-  private final SubscriptionService subscriptions;
+  private final ReportOperations reports;
+  private final SubscriptionOperations subscriptions;
   private final FhirContext r4 = FhirContext.forR4();
   private final FhirContext dstu2 = FhirContext.forDstu2();
 
-  public ApiController(ReportService reports, SubscriptionService subscriptions) {
+  public ApiController(ReportOperations reports, SubscriptionOperations subscriptions) {
     this.reports = reports; this.subscriptions = subscriptions;
   }
 
