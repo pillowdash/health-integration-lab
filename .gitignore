@@ -107,3 +107,5 @@ tmp/
 temp/
 mirth-administrator-launcher-*
 tcl/course_plan.txt
+
+.env.postgres

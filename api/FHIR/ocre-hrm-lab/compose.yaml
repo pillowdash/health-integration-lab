@@ -19,6 +19,8 @@ services:
       RABBIT_HOST: rabbitmq
       RABBIT_USER: labuser
       RABBIT_PASSWORD: labonly-change-me
+      SPRING_PROFILES_ACTIVE: postgres
+      OCRE_DB_PASSWORD: ${OCRE_DB_PASSWORD:?Database password required}        
     ports:
       - "127.0.0.1:18081:8080"
     depends_on:

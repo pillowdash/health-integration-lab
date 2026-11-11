@@ -141,6 +141,7 @@ public class PostgresSubscriptionService implements SubscriptionOperations {
                 event.physicianId(), "*")) {
             matched.put(pref.getId(), pref);
         }
+	/*
         for (var pref : matched.values()) {
             if (!deliveries.existsByReport_IdAndSubscription_Id(
                     report.get().getId(), pref.getId())) {
@@ -148,6 +149,32 @@ public class PostgresSubscriptionService implements SubscriptionOperations {
                         event.physicianId(), event.reportCode()));
             }
         }
+       */
+	for (var pref : matched.values()) {
+
+	    // Only active subscriptions generate new deliveries.
+	    if (!"active".equals(pref.getStatus())) {
+		log.debug(
+		    "Skipping subscription {} with status {}",
+		    pref.getId(),
+		    pref.getStatus()
+		);
+		continue;
+	    }
+
+	    // Keep duplicate report/subscription pairs from being recorded.
+	    if (!deliveries.existsByReport_IdAndSubscription_Id(
+		    report.get().getId(), pref.getId())) {
+
+		deliveries.save(new ReportDeliveryEntity(
+		    report.get(),
+		    pref,
+		    event.physicianId(),
+		    event.reportCode()
+		));
+	    }
+	}
+
         // Deliberately preserves the existing simulator's behavior:
         // 'requested' subscriptions are also matched. Enforce ACTIVE in Lab 04D.
         log.debug("Matched {} subscriptions for report {}", matched.size(), event.id());
