@@ -1,6 +1,6 @@
 # Ontario OCRE / HRM Modernization — Practical Integration Lab
 
-> Training simulator for **synthetic clinical data only**. This is not an Ontario Health product, production HRM implementation, or certified/conformant OCRE connector.
+
 
 ## What you get
 
