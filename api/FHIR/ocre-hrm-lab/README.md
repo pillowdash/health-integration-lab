@@ -100,7 +100,7 @@ The first JUnit test checks R4 Bundle creation and MSH-10-equivalent idempotency
 6. A matching event is recorded after RabbitMQ consumption; it is **not** a confirmed EMR delivery and does not include retry/deduplication on the consumer side.
 7. Complete tests require building with Docker; source has been packaged but may need environment-dependent adjustments.
 
-## Suggested expansion lessons
+## Suggested expansions
 
 - 02: Model an OCRE conformance-driven document bundle from the actual provincial profiles (acquire the standard package via Ontario Health).
 - 03: Test HAPI DSTU2↔R4 mappings and implement parsing + structure validation using official packages.
