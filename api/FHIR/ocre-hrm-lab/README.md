@@ -12,7 +12,7 @@ A local demo implementation of two paths:
 
 **FHIR version practice:** an R4 endpoint and separate DSTU2 parser to observe version differences.
 
-The local RabbitMQ broker is **not** Ontario Health Enterprise Pub/Sub. The FHIR profile references and topic/filter names are illustrative, not registered provincial topics. This project currently **parses and generates** FHIR resources but does not validate against licensed Ontario OCRE packages. It does not implement production OAuth 2.0, mTLS, actual REST-hook delivery, transactions/outbox, durable persistence, FHIR notification bundles or PHI logging/privacy controls.
+This project currently **parses and generates** FHIR resources but does not validate against licensed Ontario OCRE packages. It does not implement production OAuth 2.0, mTLS, actual REST-hook delivery, transactions/outbox, durable persistence, FHIR notification bundles or PHI logging/privacy controls. it uses local RabbitMQ broker 
 
 ## Requirements
 
